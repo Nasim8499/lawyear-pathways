@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Scale, Star } from "lucide-react";
-import { TopNav, Footer } from "@/components/TopNav";
+import { Scale, Star, Search } from "lucide-react";
+import { MobileLayout } from "@/components/MobileLayout";
 
 const lawyers = [
   { name: "Sarah Mitchell", country: "Australia", spec: "Skilled Migration", rating: 4.9 },
@@ -12,33 +12,34 @@ const lawyers = [
 ];
 
 const Lawyers = () => (
-  <div className="min-h-screen bg-background">
-    <TopNav />
-    <main className="max-w-5xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold text-foreground">Registered Lawyers</h1>
-      <p className="text-sm text-muted-foreground">Browse migration lawyers and authorized legal consultants.</p>
-      <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <MobileLayout title="Registered Lawyers">
+    <div className="px-4 pt-4">
+      <div className="relative">
+        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
+        <input placeholder="Search lawyers" className="w-full pl-9 pr-3 py-2.5 rounded-2xl bg-card border border-border text-sm outline-none shadow-card"/>
+      </div>
+      <div className="mt-4 space-y-2.5">
         {lawyers.map((l) => (
-          <div key={l.name} className="bg-card rounded-2xl p-4 shadow-card border border-border">
+          <div key={l.name} className="bg-card rounded-2xl p-3 shadow-card border border-border">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
-                <Scale className="text-primary-foreground" size={20}/>
+              <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow">
+                <Scale className="text-primary-foreground" size={18}/>
               </div>
-              <div className="flex-1">
-                <p className="font-bold text-foreground">{l.name}</p>
-                <p className="text-xs text-muted-foreground">{l.spec} - {l.country}</p>
+              <div className="flex-1 min-w-0">
+                <p className="font-bold text-foreground text-sm truncate">{l.name}</p>
+                <p className="text-[11px] text-muted-foreground truncate">{l.spec} • {l.country}</p>
               </div>
+              <Link to="/book" className="text-[11px] font-semibold bg-gradient-primary text-primary-foreground px-3 py-1.5 rounded-full shadow-glow">Book</Link>
             </div>
-            <div className="mt-3 flex items-center justify-between">
-              <span className="flex items-center gap-1 text-xs font-semibold text-foreground"><Star size={12} className="fill-primary text-primary"/>{l.rating}</span>
-              <Link to="/book" className="text-xs font-semibold bg-gradient-primary text-primary-foreground px-3 py-1.5 rounded-full">Book</Link>
+            <div className="mt-2 flex items-center gap-2">
+              <span className="flex items-center gap-1 text-[11px] font-semibold text-foreground"><Star size={12} className="fill-primary text-primary"/>{l.rating}</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground font-semibold">Verified</span>
             </div>
           </div>
         ))}
       </div>
-    </main>
-    <Footer />
-  </div>
+    </div>
+  </MobileLayout>
 );
 
 export default Lawyers;

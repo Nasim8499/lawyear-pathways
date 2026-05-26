@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CalendarCheck } from "lucide-react";
-import { TopNav, Footer } from "@/components/TopNav";
+import { MobileLayout } from "@/components/MobileLayout";
 
 type Status = "Requested" | "Scheduled" | "Completed" | "Cancelled";
 interface Booking { id: string; name: string; country: string; service: string; mode: string; date: string; time: string; status: Status; }
@@ -19,32 +19,32 @@ const Bookings = () => {
     localStorage.setItem("ml_bookings", JSON.stringify(next));
   };
   return (
-    <div className="min-h-screen bg-background">
-      <TopNav />
-      <main className="max-w-3xl mx-auto py-10 px-4">
+    <MobileLayout title="My Bookings">
+      <div className="px-4 pt-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-foreground">My Bookings</h1>
-          <Link to="/book" className="text-xs font-semibold bg-gradient-primary text-primary-foreground px-3 py-1.5 rounded-full shadow-glow">New</Link>
+          <p className="text-xs text-muted-foreground">{items.length} appointment{items.length === 1 ? "" : "s"}</p>
+          <Link to="/book" className="text-xs font-semibold bg-gradient-primary text-primary-foreground px-3 py-1.5 rounded-full shadow-glow">+ New</Link>
         </div>
         {items.length === 0 ? (
-          <div className="mt-10 text-center bg-card rounded-3xl p-10 border border-border shadow-card">
+          <div className="mt-6 text-center bg-card rounded-3xl p-10 border border-border shadow-card">
             <CalendarCheck className="mx-auto text-primary" size={36}/>
             <p className="mt-3 text-sm text-muted-foreground">No bookings yet.</p>
+            <Link to="/book" className="mt-4 inline-block text-xs font-semibold bg-gradient-primary text-primary-foreground px-4 py-2 rounded-full shadow-glow">Book your first appointment</Link>
           </div>
         ) : (
-          <div className="mt-5 space-y-3">
+          <div className="mt-4 space-y-3">
             {items.map((b) => (
               <div key={b.id} className="bg-card rounded-2xl p-4 shadow-card border border-border">
                 <div className="flex items-center justify-between">
-                  <p className="font-bold text-foreground">{b.service}</p>
+                  <p className="font-bold text-foreground text-sm">{b.service}</p>
                   <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${
                     b.status === "Scheduled" ? "bg-primary/15 text-primary" :
                     b.status === "Completed" ? "bg-secondary text-secondary-foreground" :
                     b.status === "Cancelled" ? "bg-destructive/15 text-destructive" :
                     "bg-accent text-accent-foreground"}`}>{b.status}</span>
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">{b.name} - {b.country} - {b.mode}</p>
-                <p className="text-xs text-muted-foreground">{b.date} at {b.time}</p>
+                <p className="text-[11px] text-muted-foreground mt-1">{b.name} • {b.country} • {b.mode}</p>
+                <p className="text-[11px] text-muted-foreground">{b.date} at {b.time}</p>
                 <div className="mt-3 flex gap-1.5 flex-wrap">
                   {STATUSES.map((s) => (
                     <button key={s} onClick={() => update(b.id, s)}
@@ -57,9 +57,8 @@ const Bookings = () => {
             ))}
           </div>
         )}
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </MobileLayout>
   );
 };
 
