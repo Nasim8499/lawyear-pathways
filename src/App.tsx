@@ -8,10 +8,13 @@ import NotFound from "./pages/NotFound.tsx";
 import MockupPreview from "./pages/MockupPreview.tsx";
 import BookAppointment from "./pages/BookAppointment.tsx";
 import Lawyers from "./pages/Lawyers.tsx";
+import LawyerProfile from "./pages/LawyerProfile.tsx";
 import Countries from "./pages/Countries.tsx";
 import Messages from "./pages/Messages.tsx";
+import MessageThread from "./pages/MessageThread.tsx";
 import Profile from "./pages/Profile.tsx";
 import Bookings from "./pages/Bookings.tsx";
+import BookingConfirmed from "./pages/BookingConfirmed.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,10 +29,13 @@ const App = () => (
           <Route path="/mockup-preview" element={<MockupPreview />} />
           <Route path="/book" element={<BookAppointment />} />
           <Route path="/lawyers" element={<Lawyers />} />
+          <Route path="/lawyers/:id" element={<LawyerProfile />} />
           <Route path="/countries" element={<Countries />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/messages/:id" element={<MessageThread />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/bookings/confirmed/:id" element={<BookingConfirmed />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
