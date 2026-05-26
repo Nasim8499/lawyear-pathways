@@ -1,5 +1,5 @@
-import MockupPreview from "./MockupPreview";
+import Home from "./Home";
 
-const Index = () => <MockupPreview />;
+const Index = () => <Home />;
 
 export default Index;
