@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { ChevronLeft, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import { TopNav, Footer } from "@/components/TopNav";
 
 const msgs = [
   { from: "Sarah Mitchell", text: "Hi Alex, please share your passport details for review.", time: "10:24" },
@@ -8,11 +8,11 @@ const msgs = [
 ];
 
 const Messages = () => (
-  <main className="min-h-screen bg-gradient-soft py-8 px-4">
-    <div className="max-w-xl mx-auto">
-      <Link to="/" className="inline-flex items-center gap-1 text-primary text-sm font-semibold mb-4"><ChevronLeft size={16}/>Back</Link>
-      <h1 className="text-2xl font-bold text-foreground">Messages</h1>
-      <div className="mt-5 space-y-2">
+  <div className="min-h-screen bg-background">
+    <TopNav />
+    <main className="max-w-2xl mx-auto py-10 px-4">
+      <h1 className="text-3xl font-bold text-foreground">Messages</h1>
+      <div className="mt-6 space-y-2">
         {msgs.map((m) => (
           <div key={m.from} className="bg-card rounded-2xl p-4 shadow-card border border-border flex items-center gap-3">
             <div className="w-11 h-11 rounded-full bg-gradient-primary flex items-center justify-center"><MessageCircle className="text-primary-foreground" size={18}/></div>
@@ -24,8 +24,9 @@ const Messages = () => (
           </div>
         ))}
       </div>
-    </div>
-  </main>
+    </main>
+    <Footer />
+  </div>
 );
 
 export default Messages;

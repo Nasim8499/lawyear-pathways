@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ChevronLeft, MapPin, Plane, Briefcase, Globe } from "lucide-react";
+import { MapPin, Plane, Briefcase, Globe } from "lucide-react";
+import { TopNav, Footer } from "@/components/TopNav";
 
 const items = [
   { c: "Australia", icon: MapPin, services: ["Skilled Migration", "Partner Visa", "Student Visa", "Business Innovation"] },
@@ -9,12 +10,12 @@ const items = [
 ];
 
 const Countries = () => (
-  <main className="min-h-screen bg-gradient-soft py-8 px-4">
-    <div className="max-w-3xl mx-auto">
-      <Link to="/" className="inline-flex items-center gap-1 text-primary text-sm font-semibold mb-4"><ChevronLeft size={16}/>Back</Link>
-      <h1 className="text-2xl font-bold text-foreground">Country & Service</h1>
+  <div className="min-h-screen bg-background">
+    <TopNav />
+    <main className="max-w-5xl mx-auto py-10 px-4">
+      <h1 className="text-3xl font-bold text-foreground">Country & Service</h1>
       <p className="text-sm text-muted-foreground">Choose a destination to see consultation areas.</p>
-      <div className="mt-5 grid sm:grid-cols-2 gap-3">
+      <div className="mt-6 grid sm:grid-cols-2 gap-4">
         {items.map((it) => {
           const I = it.icon;
           return (
@@ -35,8 +36,9 @@ const Countries = () => (
           );
         })}
       </div>
-    </div>
-  </main>
+    </main>
+    <Footer />
+  </div>
 );
 
 export default Countries;

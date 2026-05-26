@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, CalendarCheck } from "lucide-react";
+import { CalendarCheck } from "lucide-react";
+import { TopNav, Footer } from "@/components/TopNav";
 
 type Status = "Requested" | "Scheduled" | "Completed" | "Cancelled";
 interface Booking { id: string; name: string; country: string; service: string; mode: string; date: string; time: string; status: Status; }
@@ -18,11 +19,11 @@ const Bookings = () => {
     localStorage.setItem("ml_bookings", JSON.stringify(next));
   };
   return (
-    <main className="min-h-screen bg-gradient-soft py-8 px-4">
-      <div className="max-w-2xl mx-auto">
-        <Link to="/" className="inline-flex items-center gap-1 text-primary text-sm font-semibold mb-4"><ChevronLeft size={16}/>Back</Link>
+    <div className="min-h-screen bg-background">
+      <TopNav />
+      <main className="max-w-3xl mx-auto py-10 px-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-foreground">My Bookings</h1>
+          <h1 className="text-3xl font-bold text-foreground">My Bookings</h1>
           <Link to="/book" className="text-xs font-semibold bg-gradient-primary text-primary-foreground px-3 py-1.5 rounded-full shadow-glow">New</Link>
         </div>
         {items.length === 0 ? (
@@ -56,8 +57,9 @@ const Bookings = () => {
             ))}
           </div>
         )}
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   );
 };
 

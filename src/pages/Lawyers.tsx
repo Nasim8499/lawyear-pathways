@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ChevronLeft, Scale, Star } from "lucide-react";
+import { Scale, Star } from "lucide-react";
+import { TopNav, Footer } from "@/components/TopNav";
 
 const lawyers = [
   { name: "Sarah Mitchell", country: "Australia", spec: "Skilled Migration", rating: 4.9 },
@@ -11,12 +12,12 @@ const lawyers = [
 ];
 
 const Lawyers = () => (
-  <main className="min-h-screen bg-gradient-soft py-8 px-4">
-    <div className="max-w-2xl mx-auto">
-      <Link to="/" className="inline-flex items-center gap-1 text-primary text-sm font-semibold mb-4"><ChevronLeft size={16}/>Back</Link>
-      <h1 className="text-2xl font-bold text-foreground">Registered Lawyers</h1>
+  <div className="min-h-screen bg-background">
+    <TopNav />
+    <main className="max-w-5xl mx-auto py-10 px-4">
+      <h1 className="text-3xl font-bold text-foreground">Registered Lawyers</h1>
       <p className="text-sm text-muted-foreground">Browse migration lawyers and authorized legal consultants.</p>
-      <div className="mt-5 grid sm:grid-cols-2 gap-3">
+      <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {lawyers.map((l) => (
           <div key={l.name} className="bg-card rounded-2xl p-4 shadow-card border border-border">
             <div className="flex items-center gap-3">
@@ -35,8 +36,9 @@ const Lawyers = () => (
           </div>
         ))}
       </div>
-    </div>
-  </main>
+    </main>
+    <Footer />
+  </div>
 );
 
 export default Lawyers;
