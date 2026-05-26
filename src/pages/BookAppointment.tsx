@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ChevronLeft, CalendarCheck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { CalendarCheck } from "lucide-react";
+import { TopNav, Footer } from "@/components/TopNav";
 import { toast } from "sonner";
 
 const COUNTRIES = ["Australia", "New Zealand", "Singapore", "Schengen"];
@@ -40,9 +41,9 @@ const BookAppointment = () => {
     nav("/bookings");
   };
   return (
-    <main className="min-h-screen bg-gradient-soft py-8 px-4">
-      <div className="max-w-lg mx-auto">
-        <Link to="/" className="inline-flex items-center gap-1 text-primary text-sm font-semibold mb-4"><ChevronLeft size={16}/>Back</Link>
+    <div className="min-h-screen bg-background">
+      <TopNav />
+      <main className="max-w-lg mx-auto py-10 px-4">
         <div className="bg-card rounded-3xl shadow-card border border-border p-6">
           <div className="flex items-center gap-3 mb-5">
             <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow">
@@ -103,8 +104,9 @@ const BookAppointment = () => {
             <p className="text-[10px] text-muted-foreground text-center">Handled by registered migration lawyers and authorized legal consultants, where applicable.</p>
           </form>
         </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   );
 };
 

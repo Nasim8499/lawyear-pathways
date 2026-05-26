@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { ChevronLeft, User, Bell, Shield, FileText, LogOut } from "lucide-react";
+import { User, Bell, Shield, FileText, LogOut } from "lucide-react";
+import { TopNav, Footer } from "@/components/TopNav";
 
 const Profile = () => (
-  <main className="min-h-screen bg-gradient-soft py-8 px-4">
-    <div className="max-w-xl mx-auto">
-      <Link to="/" className="inline-flex items-center gap-1 text-primary text-sm font-semibold mb-4"><ChevronLeft size={16}/>Back</Link>
+  <div className="min-h-screen bg-background">
+    <TopNav />
+    <main className="max-w-2xl mx-auto py-10 px-4">
       <div className="bg-card rounded-3xl shadow-card border border-border p-6 text-center">
         <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-primary flex items-center justify-center shadow-glow">
           <User className="text-primary-foreground" size={32}/>
@@ -28,8 +28,9 @@ const Profile = () => (
           );
         })}
       </div>
-    </div>
-  </main>
+    </main>
+    <Footer />
+  </div>
 );
 
 export default Profile;
