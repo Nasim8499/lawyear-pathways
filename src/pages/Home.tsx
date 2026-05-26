@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Scale, Globe2, Plane, MapPin, Briefcase, Globe, Users, GraduationCap, TrendingUp, Gavel, Video, MessageCircle, Building2, BadgeCheck, ShieldCheck, Search, ArrowRight, ChevronRight } from "lucide-react";
 import { MobileLayout } from "@/components/MobileLayout";
+import { CountrySlider } from "@/components/CountrySlider";
 
 const countries = [
   { c: "Australia", icon: MapPin, flag: "AU" },
@@ -47,6 +48,7 @@ const Home = () => (
         <input placeholder="Search counsel, jurisdictions…"
           className="w-full pl-10 pr-4 py-3.5 rounded-full bg-card border border-border/80 text-sm outline-none focus:ring-1 focus:ring-gold shadow-card font-body"/>
       </div>
+      <CountrySlider/>
     </section>
 
     {/* BENTO GRID */}
