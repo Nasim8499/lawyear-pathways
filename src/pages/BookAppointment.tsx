@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CalendarCheck } from "lucide-react";
-import { TopNav, Footer } from "@/components/TopNav";
+import { MobileLayout } from "@/components/MobileLayout";
 import { toast } from "sonner";
 
 const COUNTRIES = ["Australia", "New Zealand", "Singapore", "Schengen"];
@@ -41,17 +41,16 @@ const BookAppointment = () => {
     nav("/bookings");
   };
   return (
-    <div className="min-h-screen bg-background">
-      <TopNav />
-      <main className="max-w-lg mx-auto py-10 px-4">
-        <div className="bg-card rounded-3xl shadow-card border border-border p-6">
-          <div className="flex items-center gap-3 mb-5">
+    <MobileLayout title="Book Appointment" showBack>
+      <div className="px-4 pt-4">
+        <div className="bg-card rounded-3xl shadow-card border border-border p-5">
+          <div className="flex items-center gap-3 mb-4">
             <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow">
               <CalendarCheck className="text-primary-foreground" size={20}/>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">Book Appointment</h1>
-              <p className="text-xs text-muted-foreground">Connect with a registered migration lawyer</p>
+              <p className="text-sm font-bold text-foreground">New Appointment</p>
+              <p className="text-[11px] text-muted-foreground">Connect with a registered migration lawyer</p>
             </div>
           </div>
           <form onSubmit={submit} className="space-y-3">
@@ -104,9 +103,8 @@ const BookAppointment = () => {
             <p className="text-[10px] text-muted-foreground text-center">Handled by registered migration lawyers and authorized legal consultants, where applicable.</p>
           </form>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </MobileLayout>
   );
 };
 

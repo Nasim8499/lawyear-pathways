@@ -1,5 +1,5 @@
 import { MessageCircle } from "lucide-react";
-import { TopNav, Footer } from "@/components/TopNav";
+import { MobileLayout } from "@/components/MobileLayout";
 
 const msgs = [
   { from: "Sarah Mitchell", text: "Hi Alex, please share your passport details for review.", time: "10:24" },
@@ -8,25 +8,22 @@ const msgs = [
 ];
 
 const Messages = () => (
-  <div className="min-h-screen bg-background">
-    <TopNav />
-    <main className="max-w-2xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold text-foreground">Messages</h1>
-      <div className="mt-6 space-y-2">
+  <MobileLayout title="Messages">
+    <div className="px-4 pt-4">
+      <div className="space-y-2">
         {msgs.map((m) => (
-          <div key={m.from} className="bg-card rounded-2xl p-4 shadow-card border border-border flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-gradient-primary flex items-center justify-center"><MessageCircle className="text-primary-foreground" size={18}/></div>
-            <div className="flex-1">
+          <div key={m.from} className="bg-card rounded-2xl p-3 shadow-card border border-border flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow shrink-0"><MessageCircle className="text-primary-foreground" size={18}/></div>
+            <div className="flex-1 min-w-0">
               <p className="font-bold text-foreground text-sm">{m.from}</p>
-              <p className="text-xs text-muted-foreground">{m.text}</p>
+              <p className="text-[11px] text-muted-foreground truncate">{m.text}</p>
             </div>
             <span className="text-[10px] text-muted-foreground">{m.time}</span>
           </div>
         ))}
       </div>
-    </main>
-    <Footer />
-  </div>
+    </div>
+  </MobileLayout>
 );
 
 export default Messages;

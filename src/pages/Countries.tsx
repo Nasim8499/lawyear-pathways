@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Plane, Briefcase, Globe } from "lucide-react";
-import { TopNav, Footer } from "@/components/TopNav";
+import { MobileLayout } from "@/components/MobileLayout";
 
 const items = [
   { c: "Australia", icon: MapPin, services: ["Skilled Migration", "Partner Visa", "Student Visa", "Business Innovation"] },
@@ -10,35 +10,32 @@ const items = [
 ];
 
 const Countries = () => (
-  <div className="min-h-screen bg-background">
-    <TopNav />
-    <main className="max-w-5xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold text-foreground">Country & Service</h1>
-      <p className="text-sm text-muted-foreground">Choose a destination to see consultation areas.</p>
-      <div className="mt-6 grid sm:grid-cols-2 gap-4">
+  <MobileLayout title="Countries">
+    <div className="px-4 pt-4">
+      <p className="text-xs text-muted-foreground">Choose a destination to see consultation areas.</p>
+      <div className="mt-4 space-y-3">
         {items.map((it) => {
           const I = it.icon;
           return (
-            <div key={it.c} className="bg-card rounded-2xl p-4 shadow-card border border-border">
+            <div key={it.c} className="bg-card rounded-3xl p-4 shadow-card border border-border">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow">
                   <I className="text-primary-foreground" size={18}/>
                 </div>
-                <p className="font-bold text-foreground">{it.c}</p>
+                <p className="font-bold text-foreground text-sm">{it.c}</p>
               </div>
               <ul className="mt-3 grid grid-cols-2 gap-1.5">
                 {it.services.map((s) => (
-                  <li key={s} className="text-xs px-2 py-1 rounded-lg bg-secondary text-secondary-foreground font-medium">{s}</li>
+                  <li key={s} className="text-[11px] px-2 py-1.5 rounded-lg bg-secondary text-secondary-foreground font-semibold">{s}</li>
                 ))}
               </ul>
-              <Link to="/book" className="mt-3 inline-block text-xs font-semibold bg-gradient-primary text-primary-foreground px-3 py-1.5 rounded-full">Book Consultation</Link>
+              <Link to="/book" className="mt-3 inline-block text-xs font-semibold bg-gradient-primary text-primary-foreground px-4 py-2 rounded-full shadow-glow">Book Consultation</Link>
             </div>
           );
         })}
       </div>
-    </main>
-    <Footer />
-  </div>
+    </div>
+  </MobileLayout>
 );
 
 export default Countries;
