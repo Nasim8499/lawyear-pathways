@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Scale, Globe2, Plane, MapPin, Briefcase, Globe, Users, GraduationCap, TrendingUp, Gavel, Video, MessageCircle, Building2, BadgeCheck, CalendarClock, ShieldCheck, Search, ArrowRight, ChevronRight } from "lucide-react";
+import { Scale, Globe2, Plane, MapPin, Briefcase, Globe, Users, GraduationCap, TrendingUp, Gavel, Video, MessageCircle, Building2, BadgeCheck, ShieldCheck, Search, ArrowRight, ChevronRight } from "lucide-react";
 import { MobileLayout } from "@/components/MobileLayout";
 
 const countries = [
