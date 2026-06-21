@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, Search, MapPin, BadgeCheck, Briefcase, Languages, TrendingUp } from "lucide-react";
 import { MobileLayout } from "@/components/MobileLayout";
-import { LAWYERS } from "@/data/lawyers";
+import { getStoredLawyers } from "@/data/lawyers";
 
 const FILTERS = ["All", "Australia", "New Zealand", "Singapore", "Schengen"];
 
@@ -19,10 +19,13 @@ const COUNTRY_FLAG: Record<string, string> = {
 const Lawyers = () => {
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState("All");
-  const list = useMemo(() => LAWYERS.filter((l) =>
+  const [lawyers] = useState(() => getStoredLawyers().filter((l) => l.status !== "Paused"));
+  const list = useMemo(() => lawyers.filter((l) =>
     (filter === "All" || l.country === filter) &&
     (l.name.toLowerCase().includes(q.toLowerCase()) || l.spec.toLowerCase().includes(q.toLowerCase()))
-  ), [q, filter]);
+  ), [q, filter, lawyers]);
+
+  const avgRating = lawyers.length ? (lawyers.reduce((sum, l) => sum + l.rating, 0) / lawyers.length).toFixed(1) : "0.0";
 
   return (
     <MobileLayout title="Registered Counsel">
@@ -33,14 +36,13 @@ const Lawyers = () => {
             className="w-full pl-9 pr-3 py-3 rounded-2xl bg-card border border-border text-sm outline-none shadow-card focus:ring-2 focus:ring-primary/30 transition-all"/>
         </div>
 
-        {/* Infographic stat strip */}
         <div className="mt-3 grid grid-cols-3 gap-2">
           <div className="rounded-2xl bg-gradient-primary text-primary-foreground p-2.5 shadow-glow">
-            <p className="font-display text-xl leading-none">{LAWYERS.length}+</p>
+            <p className="font-display text-xl leading-none">{lawyers.length}+</p>
             <p className="text-[9px] opacity-80 mt-1 uppercase tracking-wider">Counsel</p>
           </div>
           <div className="rounded-2xl bg-card border border-border p-2.5 shadow-card">
-            <p className="font-display text-xl leading-none text-gold flex items-center gap-1"><Star size={12} className="fill-gold text-gold"/>4.8</p>
+            <p className="font-display text-xl leading-none text-gold flex items-center gap-1"><Star size={12} className="fill-gold text-gold"/>{avgRating}</p>
             <p className="text-[9px] text-muted-foreground mt-1 uppercase tracking-wider">Avg rating</p>
           </div>
           <div className="rounded-2xl bg-card border border-border p-2.5 shadow-card">
@@ -55,15 +57,13 @@ const Lawyers = () => {
               className={`text-[11px] font-semibold px-3 py-1.5 rounded-full whitespace-nowrap transition-all duration-300 ${filter===f ? "bg-gradient-primary text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground"}`}>{f}</button>
           ))}
         </div>
-        {/* 2-column profile cards */}
         <div className="mt-4 grid grid-cols-2 gap-3">
           {list.map((l, i) => {
             const tint = COUNTRY_TINT[l.country] ?? "from-primary/10 to-gold/10";
-            const flag = COUNTRY_FLAG[l.country] ?? "";
+            const flag = COUNTRY_FLAG[l.country] ?? "GL";
             return (
               <Link to={`/lawyers/${l.id}`} key={l.id}
                 className={`group relative block bg-card rounded-3xl p-3 border border-border shadow-card hover-lift overflow-hidden animate-fade-up stagger-${Math.min(i+1,5)}`}>
-                {/* Top tinted band */}
                 <div className={`absolute inset-x-0 top-0 h-16 bg-gradient-to-br ${tint}`}/>
                 <div className="absolute top-2 right-2 z-10 text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-background/80 backdrop-blur border border-border">{flag}</div>
 
@@ -77,7 +77,6 @@ const Lawyers = () => {
                   </div>
                   <p className="text-[10px] text-muted-foreground truncate w-full">{l.spec}</p>
 
-                  {/* Infographic mini-stats */}
                   <div className="mt-2 grid grid-cols-2 gap-1.5 w-full">
                     <div className="rounded-lg bg-secondary px-1.5 py-1 flex flex-col items-center">
                       <span className="text-[10px] font-bold text-foreground flex items-center gap-0.5"><Star size={9} className="fill-gold text-gold"/>{l.rating}</span>
@@ -89,7 +88,6 @@ const Lawyers = () => {
                     </div>
                   </div>
 
-                  {/* Bar chart: experience visualization */}
                   <div className="mt-2 w-full">
                     <div className="h-1 rounded-full bg-secondary overflow-hidden">
                       <div className="h-full bg-gradient-gold" style={{ width: `${Math.min(l.years*6, 100)}%` }}/>
